@@ -26,4 +26,9 @@ Explanation:
 
 This query returns the average time between the action that correspond to event_id = 4 (i.e. time between app opens) 
 for each user in a specific client (app_id = 1).
+Could be useful to understand how often an event is triggered by each user to segment their behavior, of to find
+events being triggered too often (possible errors).
 
+This query could be rewritten using the LAG function on columns time_stamp and device_id instead of window functions
+and calculating the average only using the time_stamps for same user with a CASE statement, but using window functions
+is usually faster.
