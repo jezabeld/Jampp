@@ -1,0 +1,29 @@
+SQL code:
+
+WITH events AS (
+    SELECT
+      device_id,
+      time_stamp,
+      LEAD(time_stamp) OVER (PARTITION BY device_id ORDER BY time_stamp) as next_time_stamp
+    FROM events_table
+    WHERE month = '201908'
+    AND app_id = 1
+    AND event_id = 4
+),
+per_event AS (
+    SELECT 
+      device_id,
+      DATE_DIFF('second', time_stamp, next_time_stamp) as time_diff
+    FROM events
+)
+SELECT
+  device_id,
+  AVG(time_diff) as avg_per_user
+FROM per_event
+GROUP BY 1;
+
+Explanation:
+
+This query returns the average time between the action that correspond to event_id = 4 (i.e. time between app opens) 
+for each user in a specific client (app_id = 1).
+
