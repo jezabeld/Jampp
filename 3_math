@@ -1,0 +1,47 @@
+The Pirats Law:
+
+“The Pirates law” says that if you have a treasure, the captain must choose a group of
+pirates and give the same amount of coins to each of them until there’s no more coins
+available to give all of them exactly the same quantity of coins. So, the coins remaining will
+go to the captain’s pocket.
+Morgan (the captain) must split a treasure with less than 1000 golden coins. He
+knows that if he chose a group of 99 pirates, 51 coins are going to be for him and if he chose
+77 pirates, only 29 coins will remain for him.
+
+Objective: How many pirates the Captain should select to achieve the maximum number of
+coins given “The pirate law”? And given the number of pirates, how many coins he will get?
+Note: Pirates must have at least 1 coin each.
+
+
+Resolution:
+
+Objective is to maximize the remainder of division:
+ T = P . C + R
+Where:
+T = total coins in treasure
+P = number of pirates selected to split the treasure
+C = coins given to each pirate
+R = coins remaining for the Captain (a.k.a. remainder)
+
+Restrictions:
+T, C, P and R are natural numbers (integers > 0)
+X is less than 1000
+
+Is is known that maximum remainder is: max R = divisor - 1, so if we want to maximize R we can maximize P instead.
+ P = ( T - R ) / C
+So maximum P can be obtained calculating maximum of (T - R) or minimum of C, which we already know 'cause C 
+is a narural number: min C = 1.
+
+Then, with C = 1:
+ T = P + R
+If we want maximum R, replace it for P - 1:
+ T = P + ( P - 1 )
+ T = 2P - 1
+ P = ( T + 1 ) / 2
+ 
+So, in order to obtain the maximum amount of coins Morgan should calculate the pirats with the formula
+( T + 1 ) / 2 and round the result always to the bigest integer. With this formula he will be always given
+one coin to each pirate. In case he want to give more coins to each pirate (or if there are not enough pirates 
+to choose) but still getting the biggest remainder, he should multiply the number of pirates obtained with the 
+formula by the number of coins he wants to give to each pirate.
+
